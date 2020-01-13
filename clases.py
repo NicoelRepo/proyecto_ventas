@@ -6,7 +6,7 @@ class venta:
         return self.prenda
     
     def pedir_targeta_y_cuotas(self):
-        Targetas = ['visa', 'master', 'maestro', 'cabal', 'naranja', 'american Express']
+        Targetas = ['visa', 'master', 'maestro', 'cabal', 'naranja', 'american express']
         while(True):
             self.credito_o_debito = str(input('Introduzca credito o debito: ')).lower()
             if ['credito', 'debito'].count(self.credito_o_debito) != 1:
