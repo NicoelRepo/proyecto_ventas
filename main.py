@@ -58,11 +58,13 @@ def display_day_edition_menu(dia_a_editar):
 def display_main_menu():
     while True:
         print('''
+           ---------*---------
             MENU PRINCIPAL
             [C]mpezar día
             [E]ditar día
             [M]ostrar lista de dias
             [S]salir
+           ---------*---------
             ''')
 
         command = str(input('Que quieres hacer? ')).lower()
