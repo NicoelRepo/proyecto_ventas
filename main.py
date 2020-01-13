@@ -10,11 +10,13 @@ def crear_nuevo_dia(day):
 def display_day_edition_menu(dia_a_editar):
     while True:
         print('''
+           ---------*---------
             MENU DE EDICION
             [A]ñadir venta
             [E]liminar venta
             [L]ista de ventas
             [S]alir
+           ---------*---------
             ''')
         
         command = str(input('Que quieres hacer? '))
