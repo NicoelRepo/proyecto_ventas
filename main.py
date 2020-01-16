@@ -25,15 +25,20 @@ def display_day_edition_menu(dia_a_editar):
             dia_a_editar.añadir_venta()
         
         elif command == 'e':
-            modo_a_eliminar = str(input('Introduzca el modo de la venta: '))
-            venta_a_elimnar = int(input('Introduzca numero de venta a eliminar: '))
             try:
+                modo_a_eliminar = str(input('Introduzca el modo de la venta: '))
+                venta_a_elimnar = int(input('Introduzca numero de venta a eliminar: '))
                 if modo_a_eliminar == 'efectivo':
                     basura = dia_a_editar.libro_del_dia['efectivo'].pop(venta_a_elimnar)
                 elif modo_a_eliminar == 'targeta':
                     basura = dia_a_editar.libro_del_dia['targeta'].pop(venta_a_elimnar)
-            except IndexError:
-                print('La venta no ha sido encontrada')        
+                else:
+                    raise ValueError    
+            except (IndexError, ValueError):
+                print()
+                print('La venta no ha sido encontrada')
+            else:
+                print('La venta ha sido eliminada correctamente')
 
         elif command == 'l':
             print('-----------------*-----------------')
