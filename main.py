@@ -30,8 +30,8 @@ def display_day_edition_menu(dia_a_editar):
                 venta_a_elimnar = int(input('Introduzca numero de venta a eliminar: '))
                 if modo_a_eliminar == 'efectivo':
                     basura = dia_a_editar.libro_del_dia['efectivo'].pop(venta_a_elimnar)
-                elif modo_a_eliminar == 'targeta':
-                    basura = dia_a_editar.libro_del_dia['targeta'].pop(venta_a_elimnar)
+                elif modo_a_eliminar == 'tarjeta':
+                    basura = dia_a_editar.libro_del_dia['tarjeta'].pop(venta_a_elimnar)
                 else:
                     raise ValueError    
             except (IndexError, ValueError):
@@ -47,8 +47,8 @@ def display_day_edition_menu(dia_a_editar):
             for i,value in enumerate((dia_a_editar.libro_del_dia['efectivo'])):
                 print(str(i) + '|', '$' + str(value[1]), value[2] + '|', value[0])
             print()
-            print('Targeta')
-            for i,value in enumerate(dia_a_editar.libro_del_dia['targeta']):
+            print('tarjeta')
+            for i,value in enumerate(dia_a_editar.libro_del_dia['tarjeta']):
                 print(str(i) + '|', '$' + str(value[1]), value[2], value[3], str(value[4]) + '|', value[0])
             print('-----------------*-----------------')
 

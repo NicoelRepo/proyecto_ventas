@@ -5,8 +5,8 @@ class venta:
         self.prenda = str(input('Prenda: '))
         return self.prenda
     
-    def pedir_targeta_y_cuotas(self):
-        Targetas = ['visa', 'master', 'maestro', 'cabal', 'naranja', 'american express']
+    def pedir_tarjeta_y_cuotas(self):
+        tarjetas = ['visa', 'master', 'maestro', 'cabal', 'naranja', 'american express']
         while(True):
             self.credito_o_debito = str(input('Introduzca credito o debito: ')).lower()
             if ['credito', 'debito'].count(self.credito_o_debito) != 1:
@@ -15,8 +15,8 @@ class venta:
             break
 
         while(True):
-            self.nombre_targ = str(input('Nombre de targeta: ')).lower()
-            if Targetas.count(self.nombre_targ) != 1:
+            self.nombre_targ = str(input('Nombre de tarjeta: ')).lower()
+            if tarjetas.count(self.nombre_targ) != 1:
                 print('Introduzca los datos nuevamente')
                 continue    
         
@@ -41,9 +41,9 @@ class venta:
             except ValueError:
                 print('El precio es incorrecto')    
         while True:
-            self.modo = str(input('Targeta o Efectivo: ')).lower()
-            if self.modo == 'targeta':
-                self.tupla_venta = (self.prenda, self.precio,) + self.pedir_targeta_y_cuotas()
+            self.modo = str(input('tarjeta o Efectivo: ')).lower()
+            if self.modo == 'tarjeta':
+                self.tupla_venta = (self.prenda, self.precio,) + self.pedir_tarjeta_y_cuotas()
                 break
             elif self.modo == 'efectivo':
                 self.tupla_venta = (self.prenda, self.precio, 'Efectivo', '-', 0)
@@ -55,11 +55,11 @@ class dia():
 
     def __init__(self, fecha):
         self.fecha = (fecha[0], fecha[1], fecha[2])
-        self.libro_del_dia = {'efectivo': [], 'targeta': []}
+        self.libro_del_dia = {'efectivo': [], 'tarjeta': []}
 
     def añadir_venta(self):
         venta_aux = venta()
         if venta_aux.modo == 'efectivo':
             self.libro_del_dia['efectivo'].append(venta_aux.tupla_venta)
         else:
-            self.libro_del_dia['targeta'].append(venta_aux.tupla_venta)   
+            self.libro_del_dia['tarjeta'].append(venta_aux.tupla_venta)   
