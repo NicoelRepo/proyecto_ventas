@@ -15,10 +15,11 @@ class venta:
         while(True):
             self.credito_o_debito = str(input('[C]ancelar   Introduzca [Cred]ito o [D]ebito: ')).lower()
             if self.credito_o_debito == 'c':
-                raise Exception
+                raise Exception    
             if ['cred', 'd'].count(self.credito_o_debito) != 1:
                 print('Introduzca los datos nuevamente')
-                continue 
+                continue
+            self.credito_o_debito = 'debito'    
             break
 
         while(True):
@@ -29,7 +30,7 @@ class venta:
                 print('Introduzca los datos nuevamente')
                 continue    
         
-            if self.credito_o_debito == 'd':
+            if self.credito_o_debito == 'debito':
                 self.cuotas = 0
             else:
                 while True:   
@@ -56,14 +57,16 @@ class venta:
             except ValueError:
                 print('El precio es incorrecto')    
         while True:
-            self.modo = str(input('[C]ancelar   [T]arjeta o [E]fectivo: ')).lower()
-            if self.modo.lower() == 'c':
+            modo_aux = str(input('[C]ancelar   [T]arjeta o [E]fectivo: ')).lower()
+            if modo_aux.lower() == 'c':
                 raise Exception
-            if self.modo == 't':
+            if modo_aux.lower() == 't':
+                self.modo = 'tarjeta'
                 self.tupla_venta = (self.prenda, self.precio,) + self.pedir_tarjeta_y_cuotas()
                 break
-            elif self.modo == 'e':
-                self.tupla_venta = (self.prenda, self.precio, 'Efectivo', '-', 0)
+            elif modo_aux.lower() == 'e':
+                self.modo = 'efectivo'
+                self.tupla_venta = (self.prenda, self.precio, 'efectivo', '-', 0)
                 break  
             else:
                 print('Introduzca los datos nuevamente')

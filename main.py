@@ -68,12 +68,13 @@ def create_new_day(day):
 
 
 def display_day_edition_menu(dia_a_editar):
+    basura = None
     while True:
         print('''
            ---------*---------
             MENU DE EDICION
             [A]ñadir venta
-            [E]liminar venta
+            [E]liminar venta      [D]eshacer eliminación
             [L]ista de ventas
             [S]alir
            ---------*---------
@@ -87,20 +88,27 @@ def display_day_edition_menu(dia_a_editar):
         
         elif command == 'e':
             try:
-                modo_a_eliminar = str(input('Introduzca el modo de la venta: '))
-                venta_a_elimnar = int(input('Introduzca numero de venta a eliminar: '))
-                if modo_a_eliminar == 'efectivo':
-                    basura = dia_a_editar.libro_del_dia['efectivo'].pop(venta_a_elimnar)
-                elif modo_a_eliminar == 'tarjeta':
-                    basura = dia_a_editar.libro_del_dia['tarjeta'].pop(venta_a_elimnar)
+                modo_a_eliminar = str(input('[C]ancelar   Introduzca el modo de la venta [E]fectivo [T]arjeta: '))
+                if modo_a_eliminar == 'c':
+                    raise Exception
+                venta_a_eliminar = input('[C]ancelar   Introduzca numero de venta a eliminar: ')
+                if venta_a_eliminar == 'c':
+                    raise Exception
+                venta_a_eliminar = int(venta_a_eliminar)    
+                if modo_a_eliminar == 'e':
+                    basura = ('efectivo', venta_a_eliminar, dia_a_editar.libro_del_dia['efectivo'].pop(venta_a_eliminar))
+                elif modo_a_eliminar == 't':
+                    basura = ('tarjeta', venta_a_eliminar, dia_a_editar.libro_del_dia['tarjeta'].pop(venta_a_eliminar))
                 else:
-                    raise ValueError    
+                    raise ValueError
+                _save_DAYS_to_storage()
             except (IndexError, ValueError):
                 print()
                 print('La venta no ha sido encontrada')
+            except Exception:
+                print('Eliminacion cancelada')
             else:
                 print('La venta ha sido eliminada correctamente')
-            _save_DAYS_to_storage()
 
         elif command == 'l':
             print('-----------------*-----------------')
@@ -113,6 +121,15 @@ def display_day_edition_menu(dia_a_editar):
             for i,value in enumerate(dia_a_editar.libro_del_dia['tarjeta']):
                 print(str(i) + '|', '$' + str(value[1]), value[2], value[3], str(value[4]) + '|', value[0])
             print('-----------------*-----------------')
+
+        elif command == 'd':
+            if basura != None:
+                dia_a_editar.libro_del_dia[basura[0]].insert(basura[1], basura[2])
+                _save_DAYS_to_storage()
+                basura = None
+            else:
+                print('No hay nada que deshacer')
+
 
         elif command == 's':
             _save_DAYS_to_storage()
